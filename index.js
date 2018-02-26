@@ -1232,12 +1232,12 @@ class FileIcons {
 
   getClass(name) {
     const match = this.db.matchName(name)
-    return match ? match.getClass() : null
+    return match ? match.getClass() : 'file-generic'
   }
 
   getClassWithColor(name) {
     const match = this.db.matchName(name)
-    return match ? match.getClass(0) : null
+    return match ? match.getClass(0) : 'file-generic'
   }
 }
 
