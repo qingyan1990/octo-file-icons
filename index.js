@@ -1231,16 +1231,16 @@ class FileIcons {
   }
 
   getClass(name) {
-    const match = this.db.matchName(name)
-    return match ? match.getClass() : 'file-generic'
+    const match = this.db.matchName(name.toLocaleLowerCase())
+    return match ? match.getClass() : 'text-icon'
   }
 
   getClassWithColor(name) {
-    const match = this.db.matchName(name)
-    return match ? match.getClass(0) : 'file-generic'
+    const match = this.db.matchName(name.toLocaleLowerCase())
+    return match ? match.getClass(0) : 'text-icon medium-blue'
   }
 }
 
-// console.log(new FileIcons(icondb).getClassWithColor('a/b/text.rb'))
+// console.log(new FileIcons(icondb).getClassWithColor('common/cpp/lib/muduo/License.txt'))
 
 exports.icons = new FileIcons(icondb)
