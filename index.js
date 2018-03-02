@@ -1137,10 +1137,16 @@ class IconTables {
     var icons = table[0]
     var indexes = table[1]
 
-    icons = icons.map((icon, index) => (new Icon(index, icon)))
+    icons = icons.map(function(icon, index) {
+      return new Icon(index, icon)
+    })
 
     // Dereference Icon instances from their stored offset
-    indexes = indexes.map(index => (index.map(offset => (icons[offset]))))
+    indexes = indexes.map(function(index) {
+      return index.map(function(offset) {
+        return icons[offset]
+      })
+    })
 
     return {
       byName: icons,
