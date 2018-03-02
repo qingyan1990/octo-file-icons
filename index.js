@@ -1,4 +1,4 @@
-const cache = {
+var cache = {
   directoryName: {},
   directoryPath: {},
   fileName: {},
@@ -9,7 +9,7 @@ const cache = {
   signature: {}
 }
 
-const icondb = [
+var icondb = [
   [[["arttext-icon",["dark-purple","dark-purple"],/\.artx$/i],
   ["atom-icon",["dark-green","dark-green"],/^\.atom$/],
   ["bower-icon",["medium-yellow","medium-orange"],/^bower[-_]components$/],
@@ -1134,8 +1134,8 @@ class IconTables {
   }
 
   read(table) {
-    let icons = table[0]
-    let indexes = table[1]
+    var icons = table[0]
+    var indexes = table[1]
 
     icons = icons.map((icon, index) => (new Icon(index, icon)))
 
@@ -1154,13 +1154,15 @@ class IconTables {
 
   matchName(name, directory) {
     directory = directory !== undefined ? directory : false
-    const cachedIcons = directory ? cache.directoryName : cache.fileName
-    const icons = directory ? this.directoryIcons.byName : this.fileIcons.byName
+    var cachedIcons = directory ? cache.directoryName : cache.fileName
+    var icons = directory ? this.directoryIcons.byName : this.fileIcons.byName
     if(cachedIcons[name]) {
       return cachedIcons[name]
     }
-    for(let i in icons) {
-      const icon = icons[i]
+    var icon
+    var i
+    for(i in icons) {
+      icon = icons[i]
       if(icon.match.test(name)) {
         return cachedIcons[name] = icon
       }
@@ -1170,13 +1172,16 @@ class IconTables {
 
   matchPath(path, directory) {
     directory = directory !== undefined ? directory : false
-    const cachedIcons = directory ? cache.directoryName : cache.fileName
-    const icons = directory ? this.directoryIcons.byPath : this.fileIcons.byPath
+    var cachedIcons = directory ? cache.directoryName : cache.fileName
+    var icons = directory ? this.directoryIcons.byPath : this.fileIcons.byPath
     if(cachedIcons[name]) {
       return cachedIcons[name]
     }
-    for(let i in icons) {
-      const icon = icons[i]
+
+    var icon
+    var i
+    for(i in icons) {
+      icon = icons[i]
       if(icon.match.test(path)) {
         return cachedIcons[path] = icon
       }
@@ -1188,8 +1193,10 @@ class IconTables {
     if(cache.language[name]) {
       return cache.language[name]
     }
-    for(let i in this.fileIcons.byLanguage) {
-      const icon = this.fileIcons.byLanguage[i]
+    var i
+    var icon
+    for(i in this.fileIcons.byLanguage) {
+      icon = this.fileIcons.byLanguage[i]
       if (icon.lang.test(name)) {
         return cache.language[name] = icon
       }
@@ -1201,9 +1208,10 @@ class IconTables {
     if(cache.scope[name]) {
       return cache.scope[name]
     }
-
-    for(let i in this.fileIcons.byScope) {
-      const icon = this.fileIcons.byScope[i]
+    var icon
+    var i
+    for(i in this.fileIcons.byScope) {
+      icon = this.fileIcons.byScope[i]
       if(icon.scope.test(name)) {
         return cache.scope[name] = icon
       }
@@ -1215,8 +1223,10 @@ class IconTables {
     if(cache.interpreter[name]) {
       return cache.interpreter[name]
     }
-    for(let i in this.fileIcons.byInterpreter) {
-      const icon = this.fileIcons.byInterpreter[i]
+    var i
+    var icon
+    for(i in this.fileIcons.byInterpreter) {
+      icon = this.fileIcons.byInterpreter[i]
       if(icon.interpreter.test(name)) {
         return cache.interpreter[name] = icon
       }
@@ -1231,12 +1241,12 @@ class FileIcons {
   }
 
   getClass(name) {
-    const match = this.db.matchName(name.toLocaleLowerCase())
+    var match = this.db.matchName(name.toLocaleLowerCase())
     return match ? match.getClass() : 'text-icon'
   }
 
   getClassWithColor(name) {
-    const match = this.db.matchName(name.toLocaleLowerCase())
+    var match = this.db.matchName(name.toLocaleLowerCase())
     return match ? match.getClass(0) : 'text-icon medium-blue'
   }
 }
